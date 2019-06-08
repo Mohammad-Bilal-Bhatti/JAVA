@@ -4,12 +4,12 @@ class RubixCube implements RubixCubeInterface{
 	private Surface[] SIDES = new Surface[6];
 
 	private RubixCube(){
-		SIDES[0] = Surface.getSurface(Color.WHITE);			// FRONT 		[ 0 ] 
+		SIDES[0] = Surface.getSurface(Color.WHITE);		// FRONT 		[ 0 ] 
 		SIDES[1] = Surface.getSurface(Color.YELLOW);		// BACK 		[ 1 ]
-		SIDES[2] = Surface.getSurface(Color.RED);			// LEFT 		[ 2 ]
+		SIDES[2] = Surface.getSurface(Color.RED);		// LEFT 		[ 2 ]
 		SIDES[3] = Surface.getSurface(Color.ORANGE);		// RIGHT 		[ 3 ]
-		SIDES[4] = Surface.getSurface(Color.GREEN);			// TOP 			[ 4 ]
-		SIDES[5] = Surface.getSurface(Color.BLUE);			// BOTTOM 		[ 5 ]
+		SIDES[4] = Surface.getSurface(Color.GREEN);		// TOP 			[ 4 ]
+		SIDES[5] = Surface.getSurface(Color.BLUE);		// BOTTOM 		[ 5 ]
 	}
 
 	public static RubixCubeInterface getCube(){
