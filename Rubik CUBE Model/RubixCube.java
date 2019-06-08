@@ -1,14 +1,20 @@
+import java.util.Random;
 class RubixCube implements RubixCubeInterface{
 
 	private Surface[] SIDES = new Surface[6];
 
-	public RubixCube(){
+	private RubixCube(){
 		SIDES[0] = Surface.getSurface(Color.WHITE);			// FRONT 		[ 0 ] 
 		SIDES[1] = Surface.getSurface(Color.YELLOW);		// BACK 		[ 1 ]
 		SIDES[2] = Surface.getSurface(Color.RED);			// LEFT 		[ 2 ]
 		SIDES[3] = Surface.getSurface(Color.ORANGE);		// RIGHT 		[ 3 ]
 		SIDES[4] = Surface.getSurface(Color.GREEN);			// TOP 			[ 4 ]
 		SIDES[5] = Surface.getSurface(Color.BLUE);			// BOTTOM 		[ 5 ]
+	}
+
+	public static RubixCubeInterface getCube(){
+		RubixCube cube = new RubixCube();
+		return (RubixCubeInterface)cube;
 	}
 
 	public enum Color {
@@ -100,6 +106,27 @@ class RubixCube implements RubixCubeInterface{
 			return rev_arr;
 		}
 
+		public boolean isSolved(){
+			outer_most:
+			for( int i = 0 ; i < area.length ; i++ ){
+				outer:
+				for( int j = 0 ; j < area[i].length ; j++){
+					char col_1 = area[i][j];
+					inner:
+					for( int k = 0 ; k < area.length; k++ ){
+						inner_most:
+						for(int l = 0 ; l < area[i].length ; l++){
+							if(i == k && j == l)
+								continue inner_most;	// Skip that step...
+							char col_2 = area[k][l];
+							if(col_1 != col_2)
+								return false;
+						}
+					}
+				}
+			}
+			return true;
+		}
 
 		public String toString(){
 			String s = "";
@@ -362,7 +389,7 @@ class RubixCube implements RubixCubeInterface{
 		}
 
 	}
-	public void rotateBottom(boolean inverse){
+	public void rotateDown(boolean inverse){
 		// If not inverse...
 		if(!inverse){	// Spin Clockwise...
 
@@ -416,7 +443,40 @@ class RubixCube implements RubixCubeInterface{
 		scramble(30);
 	}
 	public void scramble(int times){
-		// TODO: scramble the cube randomly...
+		Random ran_gen = new Random();
+		for( int i = 0 ; i < times ; i++){
+			int rotation_type = ran_gen.nextInt(6);
+			boolean invert = ran_gen.nextBoolean();
+			switch (rotation_type){
+				case 0:
+					rotateFront(invert);
+					break;
+				case 1:
+					rotateBack(invert);
+					break;
+				case 2:
+					rotateTop(invert);
+					break;
+				case 3:
+					rotateDown(invert);
+					break;
+				case 4:
+					rotateLeft(invert);
+					break;
+				case 5:
+					rotateRight(invert);
+					break;
+			}
+		}
+	}
+
+	public boolean isSolved(){		// Check All Sides to Solve...
+
+		for(Surface s : SIDES){
+			if(!s.isSolved())
+				return false;
+		}
+		return true;
 	}
 
 
@@ -434,14 +494,6 @@ class RubixCube implements RubixCubeInterface{
 			System.out.print(Character.toString(arr[i])+" ");
 		}
 		System.out.println();
-	}
-
-
-	public static void main(String[] args){
-		RubixCube cube = new RubixCube();
-		// Rotating Front Clockwise...
-		cube.rotateBottom(true);
-		System.out.println(cube.toString());
 	}
 
 }
