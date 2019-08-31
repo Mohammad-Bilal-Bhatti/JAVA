@@ -1,7 +1,7 @@
 # Simple Date Iterator
 
 ## Description:
-This Simple Date Iterator is like java.util.Iterator which iterates list items, but date Iterator is used to navigate between different dates.
+This Simple Date Iterator is like java.util.Iterator which iterates list items, but date Iterator is used to iterate/navigate between different dates.
 
 
 ## Interface Methods:
