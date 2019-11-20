@@ -1,5 +1,8 @@
 # Observer Pattern.
 
+## Problem Before Observer in a Nutshell
+
+![Observer Design pattern URL Diagram](https://refactoring.guru/images/patterns/content/observer/observer.png "Logo Observer Design Pattern UML")
 
 ## UML of Observer Design pattern.
 
